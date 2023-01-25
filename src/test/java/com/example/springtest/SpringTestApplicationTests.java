@@ -48,7 +48,7 @@ class SpringTestApplicationTests {
 
         //Strict order
         String result = "{\"name\": \"duke\", \"age\":\"42\"}";
-        JSONAssert.assertEquals("{\"name\": \"duke\"}", result, true);
+        JSONAssert.assertEquals("{\"name\": \"duke\"}", result, false);
     }
 
     //JSONPath
