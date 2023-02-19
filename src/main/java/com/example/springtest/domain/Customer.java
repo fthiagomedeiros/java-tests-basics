@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Builder;
 
 @Entity
 @Table( name = "CUSTOMER", schema = "CUSTOMER_INFO")
@@ -12,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Customer {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)

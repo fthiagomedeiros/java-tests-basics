@@ -1,4 +1,4 @@
-package com.example.springtest;
+package com.example.springtest.controllers;
 
 import com.example.springtest.domain.Customer;
 import com.example.springtest.services.CustomerService;
