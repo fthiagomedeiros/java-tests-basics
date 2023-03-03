@@ -5,10 +5,13 @@ import com.example.springtest.services.CustomerService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import static org.springframework.http.HttpStatus.OK;
 
@@ -23,6 +26,14 @@ public class CustomerController {
     public ResponseEntity<List<Customer>> fetchAllCustomers() {
         List<Customer> customers = service.getAllCustomers();
         return ResponseEntity.ok().body(customers);
+    }
+
+    @PostMapping
+    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer,
+        UriComponentsBuilder uriComponentsBuilder) {
+        Customer customers = service.createCustomer(customer);
+        return ResponseEntity.created(uriComponentsBuilder.path("/customer/{taskId}")
+            .build(customers.getId())).build();
     }
 
 }

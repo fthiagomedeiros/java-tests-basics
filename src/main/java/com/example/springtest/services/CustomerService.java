@@ -17,4 +17,8 @@ public class CustomerService {
         List<Customer> customers = repository.findAll();
         return customers;
     }
+
+    public Customer createCustomer(Customer customer) {
+        return null;
+    }
 }
