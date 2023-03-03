@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.security.test.context.support.WithSecurityContext;
+import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
@@ -16,6 +19,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -59,9 +63,35 @@ public class TestCustomerControllerSliced {
                 .build()
         );
 
+        String body = "{\"username\": \"username1\", "
+            + "\"firstName\": \"firstName1\", "
+            + "\"lastName\": \"lastName1\"}";
+
         MvcResult result = this.mockMvc.perform(post("/customer")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\": \"username1\", \"firstName\": \"firstName1\", \"lastName\": \"lastName1\"}"))
+                .content(body))
+            .andDo(print())
+            .andExpect(status().isCreated())
+            .andReturn();
+    }
+
+    @Test
+    public void shouldFetchCustomerById() throws Exception {
+        when(service.getCustomer(any())).thenReturn(
+            Customer
+                .builder()
+                .id(3L)
+                .username("john")
+                .firstName("John")
+                .lastName("Doe")
+                .build()
+        );
+
+        MvcResult result = this.mockMvc.perform(post("/customer/1")
+                .contentType(MediaType.APPLICATION_JSON)
+                .with(csrf())
+                .with(SecurityMockMvcRequestPostProcessors.user("duke").roles("ADMIN", "SUPER_USER"))
+            )
             .andDo(print())
             .andExpect(status().isCreated())
             .andReturn();

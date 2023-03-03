@@ -21,4 +21,8 @@ public class CustomerService {
     public Customer createCustomer(Customer customer) {
         return null;
     }
+
+    public Customer getCustomer(String id) {
+        return null;
+    }
 }
