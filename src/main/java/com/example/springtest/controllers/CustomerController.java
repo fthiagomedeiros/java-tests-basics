@@ -25,14 +25,12 @@ public class CustomerController {
     private CustomerService service;
 
     @GetMapping
-    @RolesAllowed("ADMIN")
     public ResponseEntity<List<Customer>> fetchAllCustomers() {
         List<Customer> customers = service.getAllCustomers();
         return ResponseEntity.ok().body(customers);
     }
 
     @PostMapping
-    @RolesAllowed("SUPER_ADMIN")
     public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer,
         UriComponentsBuilder uriComponentsBuilder) {
         Customer customers = service.createCustomer(customer);
@@ -41,7 +39,6 @@ public class CustomerController {
     }
 
     @GetMapping({"{id}"})
-    @RolesAllowed("ADMIN")
     public ResponseEntity<Customer> fetchCustomerById(@PathVariable String id) {
         Customer customer = service.getCustomer(id);
         return ResponseEntity.ok().body(customer);
