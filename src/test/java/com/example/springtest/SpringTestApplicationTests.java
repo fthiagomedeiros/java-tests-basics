@@ -9,7 +9,6 @@ import org.skyscreamer.jsonassert.JSONAssert;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//@ExtendWith(SpringExtension.class)
 class SpringTestApplicationTests {
 
     @BeforeEach

@@ -6,8 +6,6 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//@SpringBootTest
-//@ExtendWith(SpringExtension.class)
 class ITSpringTestApplication {
 
     @BeforeEach

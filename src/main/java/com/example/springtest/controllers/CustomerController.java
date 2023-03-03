@@ -22,7 +22,7 @@ public class CustomerController {
     @GetMapping
     public ResponseEntity<List<Customer>> fetchAllCustomers() {
         List<Customer> customers = service.getAllCustomers();
-        return new ResponseEntity<>(customers, OK);
+        return ResponseEntity.ok().body(customers);
     }
 
 }
