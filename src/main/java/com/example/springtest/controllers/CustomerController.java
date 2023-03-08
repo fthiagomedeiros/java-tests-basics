@@ -32,7 +32,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity<CustomerDTO> createCustomer(@RequestBody Customer mCustomer,
+    public ResponseEntity<CustomerDTO> createCustomer(@RequestBody CustomerDTO mCustomer,
         UriComponentsBuilder uriComponentsBuilder) {
         CustomerDTO customer = service.createCustomer(mCustomer);
         return ResponseEntity.created(uriComponentsBuilder.path("/customer/{customerId}")
@@ -40,7 +40,7 @@ public class CustomerController {
     }
 
     @GetMapping({"{id}"})
-    public ResponseEntity<CustomerDTO> fetchCustomerById(@PathVariable String id) {
+    public ResponseEntity<CustomerDTO> fetchCustomerById(@PathVariable Long id) {
         CustomerDTO customer = service.getCustomer(id);
         return ResponseEntity.ok().body(customer);
     }
