@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.example.springtest.controllers.CustomerController;
 import com.example.springtest.domain.Customer;
+import com.example.springtest.domain.CustomerDTO;
 import com.example.springtest.services.CustomerService;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -32,7 +33,7 @@ public class TestCustomerControllerSliced {
     @Test
     public void testGettingAllCustomers() throws Exception {
         when(service.getAllCustomers()).thenReturn(
-                List.of(Customer
+                List.of(CustomerDTO
                         .builder()
                         .username("john")
                         .firstName("John")
@@ -49,7 +50,7 @@ public class TestCustomerControllerSliced {
     @Test
     public void shouldCreateSuccessfullyTheCustomer() throws Exception {
         when(service.createCustomer(any())).thenReturn(
-            Customer
+            CustomerDTO
                 .builder()
                 .id(2L)
                 .username("john")
@@ -73,7 +74,7 @@ public class TestCustomerControllerSliced {
     @Test
     public void shouldFetchCustomerById() throws Exception {
         when(service.getCustomer(any())).thenReturn(
-            Customer
+            CustomerDTO
                 .builder()
                 .id(3L)
                 .username("john")
