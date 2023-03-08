@@ -19,20 +19,17 @@ public class CustomerService {
 
     public List<CustomerDTO> getAllCustomers() {
         List<Customer> customers = repository.findAll();
-        List<CustomerDTO> response = customerMapper.toCustomerDtoList(customers);
-        return response;
+        return customerMapper.toCustomerDtoList(customers);
     }
 
     public CustomerDTO createCustomer(CustomerDTO customerDTO) {
         Customer customer = customerMapper.mapToCustomer(customerDTO);
         Customer saved = repository.save(customer);
-        CustomerDTO response = customerMapper.mapToCustomerDTO(saved);
-        return response;
+        return customerMapper.mapToCustomerDTO(saved);
     }
 
     public CustomerDTO getCustomer(Long id) {
         Optional<Customer> customer = repository.findById(id);
-        CustomerDTO response = customerMapper.mapToCustomerDTO(customer.get());
-        return response;
+        return customerMapper.mapToCustomerDTO(customer.get());
     }
 }
