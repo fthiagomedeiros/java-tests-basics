@@ -35,6 +35,7 @@ public class TestCustomerControllerSliced {
         when(service.getAllCustomers()).thenReturn(
                 List.of(CustomerDTO
                         .builder()
+                        .id(1L)
                         .username("john")
                         .firstName("John")
                         .lastName("Doe")
